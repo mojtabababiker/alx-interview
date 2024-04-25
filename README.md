@@ -1,0 +1,2 @@
+# ALX Interview
+ALX interview repo is a repository that contain all the technical interview problems that will be implementing on diffrents programming languages such as `Python`, `C`, and `javaScript`.
