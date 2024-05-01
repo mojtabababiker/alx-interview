@@ -32,7 +32,7 @@ def canUnlockAll(boxes):
 
     for box in boxes:
         if not isinstance(box, list):
-            return False
+            continue
         try:
             [keys.remove(key) for key in box if key != boxes.index(box)]
         except ValueError:
