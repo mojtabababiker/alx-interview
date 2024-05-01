@@ -31,6 +31,8 @@ def canUnlockAll(boxes):
     keys = [i for i in range(1, len(boxes))]
 
     for box in boxes:
+        if not isinstance(box, list):
+            return False
         try:
             [keys.remove(key) for key in box if key != boxes.index(box)]
         except ValueError:
@@ -39,4 +41,5 @@ def canUnlockAll(boxes):
         if len(keys) == 0:
             return True
 
+    print(f"remaining boxes => {[boxes[ky] for ky in keys]}")
     return len(keys) == 0
