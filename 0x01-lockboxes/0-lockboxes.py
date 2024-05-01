@@ -12,7 +12,7 @@ LockBox problem, part of ALX technical interview prepation
 
 def canUnlockAll(boxes):
     """
-     Determine if the boxes inside boxes can be opend
+     Determine if the boxes inside boxes can be opened
 
     Parameters:
     -----------
@@ -21,24 +21,40 @@ def canUnlockAll(boxes):
 
     return:
     -----------
-    boolean: True or False, if all boxes can be opend, false otherwise
+    boolean: True or False, if all boxes can be opened, false otherwise
     """
 
     if not isinstance(boxes, list):
         return False
 
-    # contains the index of all boxes box, from 1 => 0 is already opened
-    keys = [i for i in range(1, len(boxes))]
-    box_index = 0
+    opened_boxes = [0]  # save the opened boxes qeuee
+    keys = [0]  # opened box
+    all_boxes = len(boxes)
 
-    for box in boxes:
-        try:
-            [keys.remove(key) for key in box if key != box_index]
-        except Exception:
-            # the key is 0 or, its aleardy removed or outof range
-            pass
-        box_index += 1
+    while opened_boxes and boxes:
+        current_box = boxes[opened_boxes.pop(0)]
+        for key in current_box:
+            if key not in keys:
+                opened_boxes.append(key)
+                keys.append(key)
+        if len(keys) == all_boxes:
+            return True
+    return len(keys) == all_boxes
+
+    """
+    keys = [i for i in range(1, len(boxes))]
+    for box, box_index in enumerate(boxes):
+        if box_index in opened_boxes:
+            try:
+                [(keys.remove(key), opened_box.add(key))
+                 for key in box if key != box_index]
+            except Exception:
+                # the key is 0 or, its aleardy removed or outof range
+                pass
+
+
         if len(keys) == 0:
             return True
 
     return len(keys) == 0
+    """
