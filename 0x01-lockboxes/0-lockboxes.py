@@ -26,8 +26,7 @@ def canUnlockAll(boxes):
 
     if not isinstance(boxes, list):
         return False
-    if len(boxes) == 0:
-        return True
+
     # contains the index of all boxes box, from 1 => 0 is already opened
     keys = [i for i in range(1, len(boxes))]
 
@@ -40,4 +39,4 @@ def canUnlockAll(boxes):
         if len(keys) == 0:
             return True
 
-    return False
+    return len(keys) == 0
