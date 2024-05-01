@@ -29,14 +29,16 @@ def canUnlockAll(boxes):
 
     # contains the index of all boxes box, from 1 => 0 is already opened
     keys = [i for i in range(1, len(boxes))]
+    box_index = 0
 
     for box in boxes:
         try:
-            [keys.remove(key) for key in box if key != boxes.index(box)]
+            [keys.remove(key) for key in box if key != box_index]
         except Exception:
             # the key is 0 or, its aleardy removed or outof range
             pass
+        box_index += 1
         if len(keys) == 0:
             return True
 
-    return True
+    return len(keys) == 0
