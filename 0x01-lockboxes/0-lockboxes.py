@@ -34,10 +34,9 @@ def canUnlockAll(boxes):
         try:
             [keys.remove(key) for key in box if key != boxes.index(box)]
         except Exception:
-            # the key is 0 or its aleardy removed
+            # the key is 0 or, its aleardy removed or outof range
             pass
         if len(keys) == 0:
             return True
 
-    print(f"remaining boxes => {[boxes[ky] for ky in keys]}")
     return len(keys) == 0
