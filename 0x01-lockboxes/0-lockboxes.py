@@ -31,11 +31,9 @@ def canUnlockAll(boxes):
     keys = [i for i in range(1, len(boxes))]
 
     for box in boxes:
-        if not isinstance(box, list):
-            continue
         try:
             [keys.remove(key) for key in box if key != boxes.index(box)]
-        except ValueError:
+        except Exception:
             # the key is 0 or its aleardy removed
             pass
         if len(keys) == 0:
