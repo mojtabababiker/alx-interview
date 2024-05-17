@@ -17,7 +17,7 @@ def main():
     code entry point, run the main code
     """
     pattern = r'((\d{1,3}\.){3}\d{1,3}|\w+)\s?\-\s?\[(.*?)\]'
-    pattern += r' "GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)'
+    pattern += r' "GET \/projects\/260 HTTP\/1\.1" (\d{3}|\w+)? (\d+)'
     count = 0
 
     for line in sys.stdin:
@@ -25,7 +25,11 @@ def main():
         count += 1
         if match:
             file_size = match.group(5)
-            code = int(match.group(4))
+            code = match.group(4)
+            try:
+                code = int(code)
+            except ValueError:
+                pass
             stats['file_size'] = stats.get('file_size', 0) + int(file_size)
             if code in codes:
                 stats[code] = stats.get(code, 0) + 1
