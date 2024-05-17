@@ -53,10 +53,9 @@ def interupt_handler(sig_num, frame):
     print_stats(stats)
 
 
-if __name__ == "__main__":
-    signal.signal(signal.SIGINT, interupt_handler)
-    try:
-        main()
-    except KeyboardInterrupt:
-        print_stats(stats)
-        signal.siginterrupt(signal.SIGINT, True)
+signal.signal(signal.SIGINT, interupt_handler)
+try:
+    main()
+except KeyboardInterrupt:
+    print_stats(stats)
+    signal.siginterrupt(signal.SIGINT, True)
