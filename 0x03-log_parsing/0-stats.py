@@ -16,7 +16,7 @@ def main():
     """
     code entry point, run the main code
     """
-    pattern = r'((\d{1,3}\.){3}\d{1,3}) \- \[(.*?)\]'
+    pattern = r'((\d{1,3}\.){3}\d{1,3}|\w+)\s?\-\s?\[(.*?)\]'
     pattern += r' "GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)'
     count = 0
 
