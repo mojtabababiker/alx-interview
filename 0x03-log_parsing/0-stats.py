@@ -22,24 +22,25 @@ def main():
 
     for line in sys.stdin:
         match = re.fullmatch(pattern, line.strip())
+        count += 1
         if match:
             file_size = match.group(5)
             code = int(match.group(4))
             stats['file_size'] = stats.get('file_size', 0) + int(file_size)
             if code in codes:
                 stats[code] = stats.get(code, 0) + 1
-            count += 1
 
         if count >= 10:
             count = 0
             print_stats(stats)
+    print_stats(stats)
 
 
 def print_stats(stats: dict):
     """
     prints the parsed stats
     """
-    print("File size: {}".format(stats.get('file_size', 0)))
+    print("File size: {}".format(stats.get('file_size', 0)), file=sys.stdout)
     for code in codes:
         val = stats.get(code, None)
         if val:
@@ -54,8 +55,4 @@ def interupt_handler(sig_num, frame):
 
 
 signal.signal(signal.SIGINT, interupt_handler)
-try:
-    main()
-except KeyboardInterrupt:
-    print_stats(stats)
-    signal.siginterrupt(signal.SIGINT, True)
+main()
