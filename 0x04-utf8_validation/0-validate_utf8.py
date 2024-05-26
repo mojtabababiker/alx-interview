@@ -19,7 +19,7 @@ def validUTF8(data):
     result: boolean
     """
     if not data or not isinstance(data, list):
-        return False
+        return True
 
     msp = 1 << 7  # 1000 0000
     smsp = 1 << 6  # 0100 0000
