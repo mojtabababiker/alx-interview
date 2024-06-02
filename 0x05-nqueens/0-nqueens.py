@@ -83,4 +83,4 @@ if __name__ == "__main__":
     board = [[0] * N for _ in range(N)]
     solve(board, 0)
     for sol in solutions:
-        print(sol)
+        print(sorted(sol, key=lambda e: e[0]))
