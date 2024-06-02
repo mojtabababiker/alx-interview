@@ -6,6 +6,9 @@ queens on an N×N chessboard
 import sys
 
 
+solutions = []
+
+
 def is_safe_pos(board: list[list[int]], row: int, col: int) -> bool:
     """
     Check if the current position is a safe for putting a queen on
@@ -34,7 +37,7 @@ def is_safe_pos(board: list[list[int]], row: int, col: int) -> bool:
     return True
 
 
-def solve(board: list[list[int]], col: int) -> bool:
+def solve(board: list[list[int]], col: int, sol: list[int] = []):
     """
     solve N-queens problem using  backtracking algorithim
 
@@ -46,22 +49,21 @@ def solve(board: list[list[int]], col: int) -> bool:
 
     Returns:
     -----------
-    bool: True if there is a sol, other-wise False
+    None
     """
 
     if col >= len(board):
-        return True
-
+        solutions.append(sol[:])
+        return
     for i in range(len(board)):
         if is_safe_pos(board, i, col):
             board[i][col] = 1
+            sol.append([i, col])
 
-            if solve(board, col + 1):
-                return True
+            solve(board, col + 1, sol)  # recurs
 
-            board[i][col] = 0  # backtrack
-
-    return False
+            board[i][col] = 0  # backtracking
+            sol.remove([i, col])  # backtracking
 
 
 if __name__ == "__main__":
@@ -80,5 +82,5 @@ if __name__ == "__main__":
 
     board = [[0] * N for _ in range(N)]
     solve(board, 0)
-    for sol in board:
+    for sol in solutions:
         print(sol)
