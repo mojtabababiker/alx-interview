@@ -66,21 +66,20 @@ def solve(board: list[list[int]], col: int, sol: list[int] = []):
             sol.remove([i, col])  # backtracking
 
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: nqueens N")
-        exit(1)
+if len(sys.argv) != 2:
+    print("Usage: nqueens N")
+    exit(1)
 
-    try:
-        N = int(sys.argv[1])
-    except TypeError:
-        print("N must be a number")
-        exit(1)
-    if N < 4:
-        print("N must be at least 4")
-        exit(1)
+try:
+    N = int(sys.argv[1])
+except TypeError:
+    print("N must be a number")
+    exit(1)
+if N < 4:
+    print("N must be at least 4")
+    exit(1)
 
-    board = [[0] * N for _ in range(N)]
-    solve(board, 0)
-    for sol in solutions:
-        print(sorted(sol, key=lambda e: e[0]))
+board = [[0] * N for _ in range(N)]
+solve(board, 0)
+for sol in solutions:
+    print(sorted(sol, key=lambda e: e[0]))
