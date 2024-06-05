@@ -21,7 +21,7 @@ function fetch (url) {
 async function printFilmChars (filmId) {
   try {
     const film = await fetch(`${url}films/${filmId}`);
-    const charactersUrl = film['characters'];
+    const charactersUrl = film.characters;
     for (const characterUrl of charactersUrl) {
       const character = await fetch(characterUrl);
       console.log(character.name);
