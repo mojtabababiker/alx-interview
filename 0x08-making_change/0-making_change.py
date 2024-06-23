@@ -19,13 +19,8 @@ def makeChange(coins, total):
          0 if total is <= 0
          -1 if coins can't meet total
     """
-    cached_mins = {
-        0: 0
-    }
-
-    if total <= 0:
-        return 0
-
+    """
+    ============== USING DYNAMIC PROGRAMMING ================
     for sub_total in range(1, total + 1):
         for coin in coins:
             min_ = sub_total - coin
@@ -37,15 +32,22 @@ def makeChange(coins, total):
     if cached_mins.get(total, total + 1) == total + 1:
         return -1
     return cached_mins.get(total)
+    ==========================================================
+    """
 
+    """
+    ========================= USING MATH =====================
+    """
+    coins_num = 0
 
-if __name__ == "__main__":
-    print(makeChange([1, 2, 25], 37))
+    if total <= 0:
+        return 0
 
-    print(makeChange([1256, 54, 48, 16, 102], 1453))
+    for coin in sorted(coins, key=lambda e: -e):
+        while (total - coin) >= 0:
+            total -= coin
+            coins_num += 1
 
-    print(makeChange([1], 11))
-
-    print(makeChange([1, 2, 5, 10, 20, 50, 100, 500, 1000], 70))
-
-    print(makeChange([1, 2, 5, 10, 20, 50, 100, 500, 1000], 121))
+    if total == 0:
+        return coins_num
+    return -1
